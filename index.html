@@ -1,106 +1,152 @@
-<div class="card">
-  <h1>Happy 16th Birthday 🎂</h1>
-  <h2>Rashika</h2>
-  <h3>— Miss Extra Class 🙂</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Birthday Rashika!</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(to top, #ffecd2, #fcb69f);
+    }
 
-  <p>
-    Born on December 25th,<br>
-    a day already known for warmth and light 🎄<br><br>
+    /* Card */
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 50px;
+      text-align: center;
+      border-radius: 20px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      z-index: 10;
+      animation: cardAppear 1s ease forwards;
+      opacity: 0;
+    }
 
-    Wishing you a year filled with calm moments,<br>
-    small wins, real smiles,<br>
-    and everything that matters to you.
-  </p>
+    @keyframes cardAppear {
+      0% {opacity: 0; transform: translate(-50%, -60%) scale(0.5);}
+      100% {opacity: 1; transform: translate(-50%, -50%) scale(1);}
+    }
 
-  <span>Have a great day ✨</span>
-</div>
+    .card h1 {
+      font-size: 3em;
+      color: #ff4081;
+      margin: 0 0 20px;
+    }
 
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    background: linear-gradient(135deg, #e96443, #904e95);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont;
-    overflow: hidden;
-  }
+    .card h2 {
+      font-size: 2em;
+      color: #673ab7;
+      margin: 0 0 10px;
+    }
 
-  .card {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 36px;
-    border-radius: 20px;
-    text-align: center;
-    color: white;
-    backdrop-filter: blur(12px);
-    animation: fadeIn 1.8s ease;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
-    max-width: 90%;
-  }
+    .card p {
+      font-size: 1.2em;
+      color: #555;
+      margin: 5px 0;
+    }
 
-  h1 {
-    margin: 0;
-    font-size: 2em;
-    font-weight: 600;
-  }
+    .card p.message {
+      font-style: italic;
+      color: #ff5722;
+      margin-top: 15px;
+    }
 
-  h2 {
-    margin: 8px 0 2px;
-    font-size: 1.6em;
-    font-weight: 500;
-  }
+    /* Balloons */
+    .balloon {
+      position: absolute;
+      bottom: -150px;
+      width: 50px;
+      height: 70px;
+      border-radius: 50% 50% 50% 50%;
+      background: red;
+      text-align: center;
+      animation: floatUp 10s linear infinite;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
 
-  h3 {
-    margin: 0 0 18px;
-    font-size: 1em;
-    font-weight: 400;
-    opacity: 0.85;
-  }
+    .balloon:after {
+      content: '';
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      width: 2px;
+      height: 40px;
+      background: #333;
+    }
 
-  p {
-    font-size: 1.05em;
-    line-height: 1.6;
-    opacity: 0.95;
-  }
+    .balloon.pop {
+      transform: scale(0);
+      opacity: 0;
+      transition: all 0.3s;
+    }
 
-  span {
-    display: block;
-    margin-top: 18px;
-    font-size: 0.9em;
-    opacity: 0.85;
-  }
+    @keyframes floatUp {
+      0% {transform: translateY(0) rotate(0deg);}
+      50% {transform: translateY(-500px) rotate(15deg);}
+      100% {transform: translateY(-1000px) rotate(-10deg);}
+    }
 
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+    /* Ribbon confetti */
+    .ribbon {
+      position: absolute;
+      width: 10px;
+      height: 30px;
+      background: linear-gradient(45deg, #f44336, #ffeb3b);
+      top: 0;
+      animation: fall 5s linear infinite;
+      opacity: 0.8;
+    }
 
-  .heart, .snow {
-    position: absolute;
-    animation: float 6s linear infinite;
-    opacity: 0.9;
-  }
+    @keyframes fall {
+      0% {transform: translateY(0) rotate(0deg);}
+      100% {transform: translateY(100vh) rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
 
-  .heart {
-    font-size: 16px;
-  }
+  <div class="card">
+    <h1>Happy Birthday Rashika! 🎉</h1>
+    <h2>Miss Extra Class broo</h2>
+    <p>Wishing you a day full of love, laughter, and endless surprises! 🎂✨</p>
+    <p class="message">Your vape was cool, fly high like the smoke from it ☁️</p>
+  </div>
 
-  .snow {
-    font-size: 12px;
-  }
+  <script>
+    const colors = ['#f44336', '#e91e63', '#9c27b0', '#2196f3', '#ffeb3b', '#4caf50'];
 
-  @keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
-  }
-</style>
+    // Generate balloons
+    for(let i = 0; i < 15; i++){
+      let balloon = document.createElement('div');
+      balloon.classList.add('balloon');
+      balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
+      balloon.style.left = Math.random() * window.innerWidth + 'px';
+      balloon.style.animationDuration = (5 + Math.random() * 5) + 's';
+      balloon.addEventListener('click', () => {
+        balloon.classList.add('pop');
+      });
+      document.body.appendChild(balloon);
+    }
 
-<script>
-  function create(symbol) {
-    const el = document.createElement("div");
-    el.className = symbol === "❤️" ? "heart" : "snow";
-    el.innerHTML = symbol;
-    el.style.left = Math.random() * 100 + "vw";
-    el.style.animationDuration = (4 + Math.random() * 4) + "s";
-    document.body.appendChild(el
+    // Generate ribbons/confetti
+    for(let i = 0; i < 50; i++){
+      let ribbon = document.createElement('div');
+      ribbon.classList.add('ribbon');
+      ribbon.style.left = Math.random() * window.innerWidth + 'px';
+      ribbon.style.background = colors[Math.floor(Math.random() * colors.length)];
+      ribbon.style.animationDuration = (2 + Math.random() * 3) + 's';
+      ribbon.style.width = (5 + Math.random() * 10) + 'px';
+      ribbon.style.height = (10 + Math.random() * 20) + 'px';
+      document.body.appendChild(ribbon);
+    }
+  </script>
+
+</body>
+  </html>

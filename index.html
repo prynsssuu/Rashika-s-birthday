@@ -5,56 +5,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Happy Birthday Rashika!</title>
   <style>
+    /* Background gradient & particles */
     body {
       margin: 0;
       overflow: hidden;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(to top, #ffecd2, #fcb69f);
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fceabb, #f8b500, #ff9ff3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Floating background glow */
+    .glow {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.5) 0%, transparent 70%);
+      animation: floatGlow 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatGlow {
+      0% {transform: translateY(0px) translateX(0px);}
+      50% {transform: translateY(-100px) translateX(50px);}
+      100% {transform: translateY(0px) translateX(0px);}
     }
 
     /* Card */
     .card {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      padding: 50px;
+      position: relative;
+      background: rgba(255,255,255,0.9);
+      padding: 60px;
+      border-radius: 30px;
       text-align: center;
-      border-radius: 20px;
-      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      backdrop-filter: blur(10px);
       z-index: 10;
-      animation: cardAppear 1s ease forwards;
+      animation: cardAppear 1.2s ease forwards;
       opacity: 0;
     }
 
     @keyframes cardAppear {
-      0% {opacity: 0; transform: translate(-50%, -60%) scale(0.5);}
-      100% {opacity: 1; transform: translate(-50%, -50%) scale(1);}
+      0% {opacity: 0; transform: translateY(-50px) scale(0.7);}
+      100% {opacity: 1; transform: translateY(0) scale(1);}
     }
 
     .card h1 {
       font-size: 3em;
-      color: #ff4081;
-      margin: 0 0 20px;
+      color: #ff6f91;
+      text-shadow: 0 0 20px #ff6f91;
+      margin-bottom: 10px;
     }
 
     .card h2 {
       font-size: 2em;
-      color: #673ab7;
-      margin: 0 0 10px;
+      color: #6c5ce7;
+      margin-bottom: 10px;
     }
 
     .card p {
       font-size: 1.2em;
-      color: #555;
+      color: #333;
       margin: 5px 0;
     }
 
     .card p.message {
       font-style: italic;
-      color: #ff5722;
+      color: #ff793f;
       margin-top: 15px;
+      font-size: 1.1em;
     }
 
     /* Balloons */
@@ -64,10 +86,9 @@
       width: 50px;
       height: 70px;
       border-radius: 50% 50% 50% 50%;
-      background: red;
-      text-align: center;
-      animation: floatUp 10s linear infinite;
       cursor: pointer;
+      animation: floatUp linear infinite;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
       transition: transform 0.3s;
     }
 
@@ -78,7 +99,7 @@
       left: 50%;
       width: 2px;
       height: 40px;
-      background: #333;
+      background: #555;
     }
 
     .balloon.pop {
@@ -88,29 +109,52 @@
     }
 
     @keyframes floatUp {
-      0% {transform: translateY(0) rotate(0deg);}
-      50% {transform: translateY(-500px) rotate(15deg);}
-      100% {transform: translateY(-1000px) rotate(-10deg);}
+      0% {transform: translateY(0px);}
+      100% {transform: translateY(-1200px);}
     }
 
     /* Ribbon confetti */
     .ribbon {
       position: absolute;
-      width: 10px;
-      height: 30px;
-      background: linear-gradient(45deg, #f44336, #ffeb3b);
-      top: 0;
-      animation: fall 5s linear infinite;
+      width: 8px;
+      height: 25px;
+      background: linear-gradient(45deg, #ff6b6b, #ffeaa7);
+      top: -50px;
       opacity: 0.8;
+      animation: fall linear infinite;
+      border-radius: 2px;
     }
 
     @keyframes fall {
-      0% {transform: translateY(0) rotate(0deg);}
+      0% {transform: translateY(0px) rotate(0deg);}
       100% {transform: translateY(100vh) rotate(360deg);}
     }
+
+    /* Floating smoke effect */
+    .smoke {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+      filter: blur(20px);
+      animation: riseSmoke 8s linear infinite;
+      transform: translateX(-50%);
+      z-index: 1;
+    }
+
+    @keyframes riseSmoke {
+      0% {transform: translateX(-50%) translateY(0px);}
+      50% {transform: translateX(-50%) translateY(-100px);}
+      100% {transform: translateX(-50%) translateY(0px);}
+    }
+
   </style>
 </head>
 <body>
+
+  <div class="smoke"></div>
 
   <div class="card">
     <h1>Happy Birthday Rashika! 🎉</h1>
@@ -120,33 +164,45 @@
   </div>
 
   <script>
-    const colors = ['#f44336', '#e91e63', '#9c27b0', '#2196f3', '#ffeb3b', '#4caf50'];
+    const colors = ['#ff6b6b', '#ff9ff3', '#6c5ce7', '#00b894', '#ffeaa7', '#fab1a0'];
 
-    // Generate balloons
-    for(let i = 0; i < 15; i++){
+    // Create balloons
+    for(let i=0; i<20; i++){
       let balloon = document.createElement('div');
       balloon.classList.add('balloon');
       balloon.style.background = colors[Math.floor(Math.random() * colors.length)];
       balloon.style.left = Math.random() * window.innerWidth + 'px';
-      balloon.style.animationDuration = (5 + Math.random() * 5) + 's';
-      balloon.addEventListener('click', () => {
-        balloon.classList.add('pop');
-      });
+      balloon.style.animationDuration = (6 + Math.random()*4) + 's';
+      balloon.style.width = (40 + Math.random()*30) + 'px';
+      balloon.style.height = (60 + Math.random()*40) + 'px';
+      balloon.addEventListener('click', () => balloon.classList.add('pop'));
       document.body.appendChild(balloon);
     }
 
-    // Generate ribbons/confetti
-    for(let i = 0; i < 50; i++){
+    // Create ribbons/confetti
+    for(let i=0; i<60; i++){
       let ribbon = document.createElement('div');
       ribbon.classList.add('ribbon');
       ribbon.style.left = Math.random() * window.innerWidth + 'px';
       ribbon.style.background = colors[Math.floor(Math.random() * colors.length)];
-      ribbon.style.animationDuration = (2 + Math.random() * 3) + 's';
-      ribbon.style.width = (5 + Math.random() * 10) + 'px';
-      ribbon.style.height = (10 + Math.random() * 20) + 'px';
+      ribbon.style.width = (5 + Math.random()*8) + 'px';
+      ribbon.style.height = (15 + Math.random()*15) + 'px';
+      ribbon.style.animationDuration = (3 + Math.random()*3) + 's';
       document.body.appendChild(ribbon);
     }
+
+    // Floating glowing blobs for extra aesthetic
+    for(let i=0; i<5; i++){
+      let glow = document.createElement('div');
+      glow.classList.add('glow');
+      glow.style.width = (100 + Math.random()*150)+'px';
+      glow.style.height = (100 + Math.random()*150)+'px';
+      glow.style.left = Math.random()*window.innerWidth+'px';
+      glow.style.top = Math.random()*window.innerHeight+'px';
+      document.body.appendChild(glow);
+    }
+
   </script>
 
 </body>
-  </html>
+</html>
